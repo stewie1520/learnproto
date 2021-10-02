@@ -4,4 +4,15 @@ package calculator;
 
 option go_package = "./calculatorpb";
 
-service CalculatorService {}
+message SumRequest {
+  int32 num1 = 1;
+  int32 num2 = 2;
+}
+
+message SumResponse {
+  int32 result = 1;
+}
+
+service CalculatorService {
+  rpc Sum(SumRequest) returns (SumResponse) {}
+}

@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+	"fmt"
 	"log"
 
 	"github.com/stewie1520/calculatorpb"
@@ -16,5 +18,10 @@ func main() {
 
 	client := calculatorpb.NewCalculatorServiceClient(cc)
 
-	log.Printf("service client %f", client)
+	resp, err := client.Sum(context.Background(), &calculatorpb.SumRequest{Num1: 10, Num2: 20})
+	if err != nil {
+		log.Fatalf("error while calling sum api %v", err)
+	}
+
+	fmt.Printf("Result is %v", resp.GetResult())
 }
